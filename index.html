@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    
+<head>
+<meta charset="UTF-8">
+<title>Overview</title>
+
+<style>
+        
+        span.complete{ text-decoration: line-through; color:green} 
+        span.incomplete{color: rgba(180, 10, 10, 0.753);}
+
+        .red {
+            color: #080101;
+            
+            background-color: rgb(255, 113, 113);
+            width: 150px; 
+            height: 50px;
+            font-size: medium;
+            font-weight: 600;
+                   
+}           
+.green {
+            color: #080101;
+            
+            background-color: rgb(6, 212, 23);
+            width: 150px; 
+            height: 50px;
+            font-size: large;
+            font-weight: 900;
+                   
+}           
+        
+    </style>
+    
+</head>
+<body>
+
+
+    <div id="website">
+        {{ message }}
+        <span v-if="visible"> Yes</span>
+        <label for="input">-------------->Add task:</label>
+        <input v-model="txt" id="input"> 
+        <button @click="adder">+</button>
+        <!-- <span id="addy", v-if= "objective.complete"></span>  -->
+      
+        <ol>
+            <li v-for="objective in objectives">
+
+                
+                <span v-bind:class= "{complete: objective.complete, incomplete: ! objective.complete}">
+                    <input type="checkbox" id="checkbox" v-model="objective.complete" >
+                    {{objective.text}}
+                    
+                   
+                    
+                </span>
+            </li>
+        </ol>
+        
+        
+      
+
+            <input id="done" type="button" v-on:click="cliked=true" value="      DONE      " v-bind:class= "{green: cliked, red: ! cliked}">
+
+            <template v-if="cliked" >
+                
+                
+                    <template v-for="objective in objectives">
+        
+                        
+                        <span v-bind:class= "objective.complete=true">
+                               
+                        </span>
+
+                    </template>
+                
+            
+                <video ref="videoRef" src="monker.mp4" id="video-container" width="100%" width="420" height="340" controls autoplay></video>
+                
+                
+            </template>
+        
+       
+    </div>
+    
+
+   
+        
+     
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+        
+       
+
+        var website = new Vue({
+            el:"#website",
+            data: {
+
+               
+                
+                cliked:false,
+
+
+                
+            //count:0,
+            //counter=0,       
+       
+         checkedNames: [],
+      
+         message: 'Marcs vue checklist ',
+                visible: false,
+                objectives: [
+                    {text:'Learn HTML and Javascript basics', complete:false,c1:false},
+                    {text:'Download & learn node.js basics', complete:false},
+                    {text:'Complete Vuejs.org tutorial',complete:false},
+                    {text:'Build an interactive webiste using vue.js', complete:false},
+                    {text:'Upload work to github', complete:false},
+                    {text:'Get in touch with Sipstack',complete:false}
+
+                      ],
+                
+                      
+            },
+            methods:{
+                adder: function(){
+                   let todo={text: this.txt,complete:false}
+                this.objectives.push(todo)
+
+                },
+                
+               
+                        
+                   
+                    
+                    
+                    
+
+                
+                
+            }
+            
+        })
+    </script>
+  
+</body>
+
+</html>
